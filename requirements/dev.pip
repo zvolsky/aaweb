@@ -1,0 +1,13 @@
+-r base.pip
+#-r test.pip
+
+# debugging
+django-extensions
+django-debug-toolbar
+
+# deployment
+Fabric3
+
+ipython
+pywatchman
+
