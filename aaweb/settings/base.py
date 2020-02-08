@@ -210,11 +210,12 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 WHITENOISE_ROOT = os.path.join(DEV_TMP_DIR, 'static', 'root')
 MEDIA_URL = '/media/'
 #MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-#MEDIA_ROOT = os.path.join(DEV_TMP_DIR, 'media')
+MEDIA_ROOT = os.path.join(DEV_TMP_DIR, 'media')
 DEFAULT_FILE_STORAGE = 'django_b2.storage.B2Storage'    # github.com/pyutil/django-b2 (using b2sdk, by zvolsky)
 B2_APP_KEY_ID = os.environ.get('B2_APP_KEY_ID') or config.get('b2', 'B2_APP_KEY_ID')
 B2_APP_KEY = os.environ.get('B2_APP_KEY') or config.get('b2', 'B2_APP_KEY')
 B2_BUCKET_NAME = os.environ.get('B2_BUCKET_NAME') or config.get('b2', 'B2_BUCKET_NAME')
+B2_LOCAL_CACHE = 'FM'   # requires MEDIA_ROOT
 
 #mz ++
 # colorlog + https://gist.github.com/raphaelyancey/bf8b53a2dbf675f9c99cf39f9e52c224

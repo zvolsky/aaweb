@@ -1,5 +1,7 @@
 # mz
 .idea/
+.devtmp/
+media/
 dump/
 *.dump
 
