@@ -4,6 +4,7 @@
 media/
 dump/
 *.dump
+MailHog
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

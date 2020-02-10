@@ -34,8 +34,52 @@ DEV_TMP_DIR = os.path.join(BASE_DIR, '.devtmp')
 
 
 # Application definition
+TENANT_MODEL = "schemas_customers.Client"
+PG_EXTRA_SEARCH_PATHS = ['extensions']   # must be commented out for re-creating database, before migrate_schemas --shared
+
+TENANT_APPS = [
+    'django.contrib.contenttypes',
+
+    # your tenant-specific apps
+    'home',
+    'search',
+
+    'wagtail.contrib.forms',
+    'wagtail.contrib.redirects',
+    'wagtail.embeds',
+    'wagtail.sites',
+    'wagtail.users',
+    'wagtail.snippets',
+    'wagtail.documents',
+    'wagtail.images',
+    'wagtail.search',
+    'wagtail.admin',
+    'wagtail.core',
+
+    'modelcluster',
+    'taggit',
+]
+
+SHARED_APPS = [
+    'tenant_schemas',     # mandatory, should always be before any django app
+    'schemas_customers',  # you must list the app where your tenant model resides in
+] + TENANT_APPS + [
+    #'django.contrib.contenttypes',  # would be duplicate if we add TENANT_APPS
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+
+    'django_extensions',
+    'django_b2',
+]
 
 INSTALLED_APPS = [
+    'tenant_schemas',  # mandatory, should always be before any django app
+    'schemas_customers',
+
     'home',
     'search',
 
@@ -67,6 +111,9 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',   #mz ++ moved from bellow
+    'tenant_schemas.middleware.TenantMiddleware',
+    #'tenant_schemas.middleware.SuspiciousTenantMiddleware',
+    # 'tenant_schemas.middleware.DefaultTenantMiddleware',  # can be subclassed to rename DEFAULT_SCHEMA
     'whitenoise.middleware.WhiteNoiseMiddleware',      #mz ++
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -81,6 +128,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'aaweb.urls'
+#PUBLIC_SCHEMA_URLCONF = 'aaweb.urls_public'
 
 TEMPLATES = [
     {
@@ -109,7 +157,7 @@ WSGI_APPLICATION = 'aaweb.wsgi.application'
 #mz ++
 dbname = __package__.rsplit('.')[-2]
 # postgres: missing or SQLITE=   ; sqlite: SQLITE=True, Yes, atp.
-if os.environ.get('MZ_SQLITE') or bool(config.get('main', 'SQLITE')):
+if os.environ.get('MZ_SQLITE') or bool(config.get('main', 'SQLITE')):  # do not use with tenant-schemas
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -117,9 +165,10 @@ if os.environ.get('MZ_SQLITE') or bool(config.get('main', 'SQLITE')):
         }
     }
 else:
+    ORIGINAL_BACKEND = 'django.contrib.gis.db.backends.postgis'  # tenant_schemas/postgresql_backend/base.py
     DATABASES = {
         'default': {
-            'ENGINE': 'django.contrib.gis.db.backends.postgis',
+            'ENGINE': 'tenant_schemas.postgresql_backend',  # 'django.contrib.gis.db.backends.postgis|.postgresql',
             'ATOMIC_REQUESTS': True,
             'CONN_MAX_AGE': 1800,
             'HOST': 'localhost',  # ne '', kvůli např. reset_db
@@ -130,6 +179,9 @@ else:
         }
     }
 
+DATABASE_ROUTERS = (
+    'tenant_schemas.routers.TenantSyncRouter',
+)
 #mz --
 '''
 DATABASES = {
@@ -261,4 +313,4 @@ WAGTAIL_SITE_NAME = "aaweb"
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
-BASE_URL = 'http://example.com'
+#BASE_URL = 'http://example.com'
