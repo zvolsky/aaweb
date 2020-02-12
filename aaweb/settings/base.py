@@ -116,6 +116,7 @@ MIDDLEWARE = [
     # 'tenant_schemas.middleware.DefaultTenantMiddleware',  # can be subclassed to rename DEFAULT_SCHEMA
     'whitenoise.middleware.WhiteNoiseMiddleware',      #mz ++
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -128,7 +129,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'aaweb.urls'
-#PUBLIC_SCHEMA_URLCONF = 'aaweb.urls_public'
+PUBLIC_SCHEMA_URLCONF = 'aaweb.urls_public'
 
 TEMPLATES = [
     {
