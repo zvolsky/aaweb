@@ -42,6 +42,7 @@ TENANT_APPS = [
 
     # your tenant-specific apps
     'home',
+    'blog',
     'search',
 
     'wagtail.contrib.forms',
@@ -81,6 +82,7 @@ INSTALLED_APPS = [
     'schemas_customers',
 
     'home',
+    'blog',
     'search',
 
     'wagtail.contrib.forms',
