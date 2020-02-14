@@ -34,9 +34,11 @@ DEV_TMP_DIR = os.path.join(BASE_DIR, '.devtmp')
 
 
 # Application definition
+#mz ++
 TENANT_MODEL = "schemas_customers.Client"
 PG_EXTRA_SEARCH_PATHS = ['extensions']   # must be commented out for re-creating database, before migrate_schemas --shared
 
+#mz ++
 TENANT_APPS = [
     'django.contrib.contenttypes',
 
@@ -61,6 +63,7 @@ TENANT_APPS = [
     'taggit',
 ]
 
+#mz ++
 SHARED_APPS = [
     'tenant_schemas',     # mandatory, should always be before any django app
     'schemas_customers',  # you must list the app where your tenant model resides in
@@ -113,7 +116,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',   #mz ++ moved from bellow
-    'tenant_schemas.middleware.TenantMiddleware',
+    'tenant_schemas.middleware.TenantMiddleware',      #mz ++
     #'tenant_schemas.middleware.SuspiciousTenantMiddleware',
     # 'tenant_schemas.middleware.DefaultTenantMiddleware',  # can be subclassed to rename DEFAULT_SCHEMA
     'whitenoise.middleware.WhiteNoiseMiddleware',      #mz ++
@@ -131,7 +134,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'aaweb.urls'
-PUBLIC_SCHEMA_URLCONF = 'aaweb.urls_public'
+PUBLIC_SCHEMA_URLCONF = 'aaweb.urls_public'  #mz ++
 
 TEMPLATES = [
     {
@@ -271,7 +274,7 @@ DEFAULT_FILE_STORAGE = 'django_b2.storage.B2Storage'    # github.com/pyutil/djan
 B2_APP_KEY_ID = os.environ.get('B2_APP_KEY_ID') or config.get('b2', 'B2_APP_KEY_ID')
 B2_APP_KEY = os.environ.get('B2_APP_KEY') or config.get('b2', 'B2_APP_KEY')
 B2_BUCKET_NAME = os.environ.get('B2_BUCKET_NAME') or config.get('b2', 'B2_BUCKET_NAME')
-B2_LOCAL_MEDIA = 'ML'   # requires MEDIA_ROOT
+#B2_LOCAL_MEDIA = 'ML'   # requires MEDIA_ROOT
 
 #mz ++
 # colorlog + https://gist.github.com/raphaelyancey/bf8b53a2dbf675f9c99cf39f9e52c224
