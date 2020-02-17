@@ -23,8 +23,10 @@ config.read('/etc/django/aaweb/env.ini')
 DEBUG = False
 SECRET_KEY = os.environ.get('MZ_SECRET_KEY') or config.get('main', 'SECRET_KEY')
 # v ALLOWED_HOSTS musí být i www.<domena>, tj. např. <domena>,www.<domena>,*.<domena>
-ALLOWED_HOSTS = (os.environ.get('MZ_ALLOWED_HOSTS') or config.get('main', 'ALLOWED_HOSTS')
-                 ).replace(',', ' ').replace(';', ' ').split()
+#ALLOWED_HOSTS = (os.environ.get('MZ_ALLOWED_HOSTS') or config.get('main', 'ALLOWED_HOSTS')
+#                 ).replace(',', ' ').replace(';', ' ').split()
+
+ALLOWED_HOSTS = ['*']  # works together with SuspiciousTenantMiddleware
 
 # sendgrid: https://simpleisbetterthancomplex.com/tutorial/2016/06/13/how-to-send-email.html
 # sendinblue

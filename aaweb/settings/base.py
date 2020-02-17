@@ -34,9 +34,13 @@ DEV_TMP_DIR = os.path.join(BASE_DIR, '.devtmp')
 
 
 # Application definition
+
+# https://books.agiliq.com/projects/django-multi-tenant/en/latest/third-party-apps.html
+# https://stackoverflow.com/questions/19230734/python-django-multi-tenancy-solution
 #mz ++
 TENANT_MODEL = "schemas_customers.Client"
 PG_EXTRA_SEARCH_PATHS = ['extensions']   # must be commented out for re-creating database, before migrate_schemas --shared
+# 2020-02-17 made PR for this, would be accepted?
 
 #mz ++
 TENANT_APPS = [
@@ -116,8 +120,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',   #mz ++ moved from bellow
-    'tenant_schemas.middleware.TenantMiddleware',      #mz ++
-    #'tenant_schemas.middleware.SuspiciousTenantMiddleware',
+    #'tenant_schemas.middleware.TenantMiddleware',      #mz ++
+    'tenant_schemas.middleware.SuspiciousTenantMiddleware',
     # 'tenant_schemas.middleware.DefaultTenantMiddleware',  # can be subclassed to rename DEFAULT_SCHEMA
     'whitenoise.middleware.WhiteNoiseMiddleware',      #mz ++
     'django.contrib.sessions.middleware.SessionMiddleware',
