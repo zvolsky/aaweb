@@ -277,7 +277,7 @@ else:
 B2_APP_KEY_ID = os.environ.get('B2_APP_KEY_ID') or config.get('b2', 'B2_APP_KEY_ID')
 B2_APP_KEY = os.environ.get('B2_APP_KEY') or config.get('b2', 'B2_APP_KEY')
 B2_BUCKET_NAME = os.environ.get('B2_BUCKET_NAME') or config.get('b2', 'B2_BUCKET_NAME')
-#B2_LOCAL_MEDIA = 'ML'   # requires MEDIA_ROOT
+B2_LOCAL_MEDIA = 'ML'   # requires MEDIA_ROOT
 
 #mz ++
 # colorlog + https://gist.github.com/raphaelyancey/bf8b53a2dbf675f9c99cf39f9e52c224
