@@ -37,6 +37,8 @@ DEV_TMP_DIR = os.path.join(BASE_DIR, '.devtmp')
 
 # https://books.agiliq.com/projects/django-multi-tenant/en/latest/third-party-apps.html
 # https://stackoverflow.com/questions/19230734/python-django-multi-tenancy-solution
+# certifikáty:
+# https://www.codementor.io/@pauloscardine/15-minute-guide-to-secure-saas-multitenancy-with-django-and-let-s-encrypt-ijtlarca8
 #mz ++
 TENANT_MODEL = "schemas_customers.Client"
 PG_EXTRA_SEARCH_PATHS = ['extensions']   # must be commented out for re-creating database, before migrate_schemas --shared
