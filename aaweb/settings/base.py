@@ -121,11 +121,12 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',      #mz ++
     'django.middleware.security.SecurityMiddleware',   #mz ++ moved from bellow
     #'tenant_schemas.middleware.TenantMiddleware',      #mz ++
     'tenant_schemas.middleware.SuspiciousTenantMiddleware',
     # 'tenant_schemas.middleware.DefaultTenantMiddleware',  # can be subclassed to rename DEFAULT_SCHEMA
-    'whitenoise.middleware.WhiteNoiseMiddleware',      #mz ++
+    #'whitenoise.middleware.WhiteNoiseMiddleware',      #mz ++
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
