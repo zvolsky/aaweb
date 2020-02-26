@@ -1,7 +1,9 @@
-import datetime
+from datetime import date, datetime
 
 from django import forms
 from django.db import models
+from django.utils.dateformat import DateFormat
+from django.utils.formats import date_format
 from django.utils.translation import gettext_lazy as _
 
 from wagtail.admin.edit_handlers import FieldPanel
@@ -49,6 +51,20 @@ class BlogPage(RoutablePageMixin, Page):  # order is important
         self.posts = self.get_posts().filter(categories__slug=category)
         return Page.serve(self, request, *args, **kwargs)
 
+    @route(r'^(\d{4})/$')
+    @route(r'^(\d{4})/(\d{2})/$')
+    @route(r'^(\d{4})/(\d{2})/(\d{2})/$')
+    def post_by_date(self, request, year, month=None, day=None, *args, **kwargs):
+        self.posts = self.get_posts().filter(date__year=year)
+        if month:
+            self.posts = self.posts.filter(date__month=month)
+            df = DateFormat(date(int(year), int(month), 1))
+            self.search_term = df.format('F Y')
+        if day:
+            self.posts = self.posts.filter(date__day=day)
+            self.search_term = date_format(date(int(year), int(month), int(day)))
+        return Page.serve(self, request, *args, **kwargs)
+
     @route(r'^$')
     def post_list(self, request, *args, **kwargs):
         self.posts = self.get_posts()
@@ -57,7 +73,7 @@ class BlogPage(RoutablePageMixin, Page):  # order is important
 
 class PostPage(RoutablePageMixin, Page):
     body = RichTextField(blank=True)
-    date = models.DateTimeField(verbose_name="Post date", default=datetime.datetime.today)
+    date = models.DateTimeField(verbose_name="Post date", default=datetime.today)
     categories = ParentalManyToManyField('blog.BlogCategory', blank=True)
     tags = ClusterTaggableManager(through='blog.BlogPageTag', blank=True)
 
