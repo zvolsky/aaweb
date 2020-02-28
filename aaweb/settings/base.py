@@ -229,6 +229,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
+LOCALE_PATHS = ['locale']
 
 #mz changed
 TIME_ZONE = 'Europe/Prague'
