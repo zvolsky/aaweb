@@ -65,6 +65,13 @@ class BlogPage(RoutablePageMixin, Page):  # order is important
             self.search_term = date_format(date(int(year), int(month), int(day)))
         return Page.serve(self, request, *args, **kwargs)
 
+    @route(r'^(\d{4})/(\d{2})/(\d{2})/(.+)/$')
+    def post_by_date_slug(self, request, year, month, day, slug, *args, **kwargs):
+        post_page = self.get_posts().filter(slug=slug).first()
+        if not post_page:
+            raise Http404
+        return Page.serve(post_page, request, *args, **kwargs)
+
     @route(r'^$')
     def post_list(self, request, *args, **kwargs):
         self.posts = self.get_posts()
