@@ -37,3 +37,10 @@ urlpatterns = urlpatterns + [
     # of your site, rather than the site root:
     #    url(r"^pages/", include(wagtail_urls)),
 ]
+
+if settings.DEBUG_TOOLBAR:
+    import debug_toolbar
+
+    urlpatterns += [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ]

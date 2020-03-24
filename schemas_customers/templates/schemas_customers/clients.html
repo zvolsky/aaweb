@@ -1,0 +1,30 @@
+{% load i18n %}
+
+{#% extends "fex/base.html" %#}
+
+{% block content %}
+  <h1>{% trans "Websites (with CMS) for free" %}</h1>
+
+  <h2>{% trans "I want try it and have my own website." %}</h2>
+  <p><small>
+    {% trans "Yes this is really for free at least for pages you create at now." %}
+    {% trans "However at this time it is just a testing operation here. We have not much info and guaranties for you." %}
+    {% trans "We hope we will give you some guarantie for at least 2 years of operation of your pages but at this time we could hope only that your pages will survive: We can stop the operation for now immediately, from any reason and without any warning." %}
+    {% trans "The size of (free) pages and especially the size of uploaded media will be limited almost sure in the future." %}
+  </small></p>
+  <p>{% trans "Ok," %} <a href="{% url 'schemas_customers:create' %}">{% trans "create the site for me." %}</a></p>
+
+  {% if clients %}
+    <h2>{% trans "Please visit pages of our customers:" %}</h2>
+
+    <table>
+    {% for client in clients %}
+      <tr><td>
+        <a href="{{ client.url }}">{{ client.name }}</a>
+      </td></tr>
+    {% endfor %}
+    </table>
+
+    {% include 'utils/pagination.html' with current_list='schemas_customers:list' %}
+  {% endif %}
+{% endblock %}

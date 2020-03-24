@@ -15,7 +15,7 @@ urlpatterns = [
 
 urlpatterns.extend(
     i18n_patterns(
-        path('', include('schemas_customers.urls_i18n'))
+        path('', include(('schemas_customers.urls_i18n', 'schemas_customers'), namespace='schemas_customers'))
     )
 )
 
@@ -27,3 +27,10 @@ if settings.DEBUG:
     # Serve static and media files from development server
     urlpatterns += staticfiles_urlpatterns()
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG_TOOLBAR:
+    import debug_toolbar
+
+    urlpatterns += [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ]

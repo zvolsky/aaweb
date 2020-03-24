@@ -1,0 +1,13 @@
+{% load i18n %}
+
+{#% extends "fex/base.html" %#}
+
+{% block content %}
+  <h1>{% trans "Create your website" %}</h1>
+
+  <form action="post">
+    {{ form }}
+    {% csrf_token %}
+    <button type="submit">{% trans 'Submit' %}</button>
+  </form>
+{% endblock %}
