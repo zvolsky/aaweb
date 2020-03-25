@@ -82,8 +82,12 @@ SHARED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'compressor',
     'django_extensions',
     'django_b2',
+
+    'common',
+    'accounts',
 ]
 
 INSTALLED_APPS = [
@@ -117,8 +121,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'compressor',
     'django_extensions',
     'django_b2',
+
+    'common',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -244,16 +252,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATICFILES_FINDERS = [
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-]
-
-STATICFILES_DIRS = [
-    os.path.join(PROJECT_DIR, 'static'),
-]
-
-
 #mz -- replaced bellow
 # ManifestStaticFilesStorage is recommended in production, to prevent outdated
 # Javascript / CSS assets being served from cache (e.g. after a Wagtail upgrade).
@@ -270,10 +268,21 @@ STATICFILES_DIRS = [
 #STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_ROOT = os.path.join(DEV_TMP_DIR, 'static')
 STATIC_URL = '/static/'
-# (shopon style, project level static/)
-#STATICFILES_DIRS = [
-#    os.path.join(PROJECT_DIR, 'static'),
-#]
+
+STATICFILES_DIRS = [
+    os.path.join(PROJECT_DIR, 'static'),
+]
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',      # shromáždí ze STATICFILES_DIRS
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',  # shromáždí ze všech <app>/static/
+    'compressor.finders.CompressorFinder',   # překlad sass
+]
+
+COMPRESS_PRECOMPILERS = (
+    ('text/x-sass', 'django_libsass.SassCompiler'),
+    ('text/x-scss', 'django_libsass.SassCompiler'),
+)
+
 #STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'  # troubleshouting Whitenoise
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 WHITENOISE_ROOT = os.path.join(DEV_TMP_DIR, 'static', 'root')

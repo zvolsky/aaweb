@@ -1,3 +1,4 @@
+#?? -c c/base.pip
 -r base.pip
 #-r test.pip
 
@@ -9,4 +10,4 @@ Fabric3
 
 ipython
 pywatchman
-
+pip-tools

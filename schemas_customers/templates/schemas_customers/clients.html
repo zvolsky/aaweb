@@ -1,8 +1,10 @@
+{% extends "schemas_customers/main_public.html" %}
+
 {% load i18n %}
 
-{#% extends "fex/base.html" %#}
-
 {% block content %}
+  {{ block.super }}
+
   <h1>{% trans "Websites (with CMS) for free" %}</h1>
 
   <h2>{% trans "I want try it and have my own website." %}</h2>

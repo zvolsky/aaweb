@@ -1,11 +1,12 @@
-psycopg2-binary   # install after debian pkg prerequisities: apt install build-dep python-psycopg2
+psycopg2-binary   # install after debian pkg prerequisities: apt install build-dep python(3?)-psycopg2
 django>=3.0,<3.1
 wagtail>=2.8,<2.9
 
 django-extensions
 django-tenant-schemas
 django-b2
+django-libsass
+django-compressor
 whitenoise[brotli]
 
 colorlog
-

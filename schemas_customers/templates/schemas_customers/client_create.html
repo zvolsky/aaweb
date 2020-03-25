@@ -1,13 +1,24 @@
+{% extends "schemas_customers/main_public.html" %}
+
+{% load static %}
 {% load i18n %}
 
-{#% extends "fex/base.html" %#}
-
 {% block content %}
+  {{ block.super }}
+
   <h1>{% trans "Create your website" %}</h1>
 
-  <form action="post">
+  <form method="post" id="createForm">
     {{ form }}
     {% csrf_token %}
-    <button type="submit">{% trans 'Submit' %}</button>
+    <button type="submit" id="submitBtn">{% trans 'Submit' %}</button>
   </form>
+
+  <p class="hidden" id="submittedMsg">
+    {% trans "Please be patient, this will take a while." %}
+  </p>
+{% endblock %}
+
+{% block finaljs %}
+<script src="{% static "schemas_customers/js/client_create.js" %}" defer></script>
 {% endblock %}

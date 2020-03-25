@@ -1,0 +1,50 @@
+{% load static compress %}
+{% load i18n %}
+
+<html>
+<head>
+  {% block basicstyle %}
+    {% compress css %}
+      <link rel="stylesheet" type="text/x-sass" href="{% static 'common/sass/common.sass' %}">
+    {% endcompress %}
+  {% endblock basicstyle %}
+
+  {% block extrastyle %}
+  {% endblock extrastyle %}
+
+  {% block extrahead %}
+  {% endblock extrahead %}
+</head>
+
+<body>
+
+{% block header %}
+  <hr>
+{% endblock header %}
+
+{% block messages %}
+  {% if messages %}
+  <ul class="messages">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+{% endblock messages %}
+
+{% block content %}
+{% endblock content %}
+
+{% block footer %}
+  <hr>
+{% endblock footer %}
+
+{% block basicjs %}
+  <script src="{% static 'common/vendor/jquery/jquery-3.4.1.min.js' %}"></script>
+{% endblock basicjs %}
+
+{% block finaljs %}
+{% endblock finaljs %}
+
+</body>
+</html>

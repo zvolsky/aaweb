@@ -1,7 +1,10 @@
-# from django.shortcuts import render
-
 import logging
+
+from django.contrib import messages
+from django.contrib.auth.models import User
 from django.http.response import Http404
+from django.shortcuts import redirect  # , render
+from django.utils.translation import gettext as _
 from django.views.generic import CreateView, ListView
 
 from .forms import ClientCreateForm
@@ -44,8 +47,18 @@ class ClientList(ListView):
     """
 
 
-# https://www.agiliq.com/blog/2019/01/django-createview/
+# https://www.agiliq.com/blog/2019/01/django-createview/ (a little shit)
 class ClientCreate(CreateView):
     model = Client
     form_class = ClientCreateForm
     template_name = "schemas_customers/client_create.html"
+
+    def form_valid(self, form):
+        user = self.request.user  # django.contrib.auth.models.AnonymousUser or .User
+        if isinstance(user, User):
+            self.client = form.save(commit=False)
+            self.client.user = user
+            self.client.save()
+        else:
+            messages.error(self.request, _('You are not logged in.'))
+        return redirect(form.success_url)
