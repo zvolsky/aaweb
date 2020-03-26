@@ -1,5 +1,5 @@
 function submitted() {
-    $('form#createForm').addClass('hidden');
-    $('p#submittedMsg').removeClass('hidden');  // msg: this will take a while..
+    $('form#createForm').addClass('d-none');
+    $('p#submittedMsg').removeClass('d-none');  // msg: this will take a while..
 }
 $('button#submitBtn').click(submitted);

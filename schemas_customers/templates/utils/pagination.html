@@ -2,18 +2,22 @@
 
 {% if is_paginated %}
 <div class="pagination">
-  <span class="page-links">
-    {% if page_obj.has_previous %}
-      <a href="{% url current_list %}?page={{ page_obj.previous_page_number }}">{% trans 'previous' %}</a>
-    {% endif %}
-    <span class="page-current">
+  <span class="page-links btn-group">
+    <span class="btn btn-warning">
+      {% if page_obj.has_previous %}
+        <a href="{% url current_list %}?page={{ page_obj.previous_page_number }}">{% trans 'previous' %}</a>
+      {% endif %}
+    </span>
+    <span class="page-current btn btn-warning">
       {% with number=page_obj.number num_pages=page_obj.paginator.num_pages %}
         {% blocktrans %}Page {{ number }} of {{ num_pages }}{% endblocktrans %}
       {% endwith %}
     </span>
-    {% if page_obj.has_next %}
-      <a href="{% url current_list %}?page={{ page_obj.next_page_number }}">{% trans 'next' %}</a>
-    {% endif %}
+    <span class="btn btn-warning">
+      {% if page_obj.has_next %}
+        <a href="{% url current_list %}?page={{ page_obj.next_page_number }}">{% trans 'next' %}</a>
+      {% endif %}
+    </span>
   </span>
 </div>
 {% endif %}

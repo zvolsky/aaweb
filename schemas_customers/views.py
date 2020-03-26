@@ -20,7 +20,7 @@ class ClientList(ListView):
     #clients = Client.objects.exclude(name='public')
     context_object_name = 'clients'
     template_name = "schemas_customers/clients.html"
-    paginate_by = 1
+    paginate_by = 10
 
     def get_queryset(self):
         clients = Client.objects.exclude(name='public')
@@ -47,7 +47,7 @@ class ClientList(ListView):
     """
 
 
-# https://www.agiliq.com/blog/2019/01/django-createview/ (a little shit)
+# https://www.agiliq.com/blog/2019/01/django-createview/ (a little: shit)
 class ClientCreate(CreateView):
     model = Client
     form_class = ClientCreateForm
@@ -59,6 +59,6 @@ class ClientCreate(CreateView):
             self.client = form.save(commit=False)
             self.client.user = user
             self.client.save()
-        else:
-            messages.error(self.request, _('You are not logged in.'))
+        else:   # AnonymousUser
+            messages.error(self.request, _('Cannot create the website: You are not logged in.'))
         return redirect(form.success_url)

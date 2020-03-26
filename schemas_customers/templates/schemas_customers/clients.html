@@ -5,27 +5,38 @@
 {% block content %}
   {{ block.super }}
 
-  <h1>{% trans "Websites (with CMS) for free" %}</h1>
-
-  <h2>{% trans "I want try it and have my own website." %}</h2>
+  <h1>{% trans "CMS Websites for free" %}</h1>
   <p><small>
+    {% trans "What means CMS?" %}<br>
+    {% trans "CMS is Content Management System." %}<br>
+    {% trans "You can insert and change your content without knowledges of server and browser programming." %}
+  </small></p>
+
+  <h2>{% trans "Is it really for free?" %}</h2>
+  <p><small class="text-muted d-block">
     {% trans "Yes this is really for free at least for pages you create at now." %}
     {% trans "However at this time it is just a testing operation here. We have not much info and guaranties for you." %}
     {% trans "We hope we will give you some guarantie for at least 2 years of operation of your pages but at this time we could hope only that your pages will survive: We can stop the operation for now immediately, from any reason and without any warning." %}
     {% trans "The size of (free) pages and especially the size of uploaded media will be limited almost sure in the future." %}
+    <br>
+    <b>{% trans "But if this project will have success we sure give some free program to you, our early visitors." %}</b>
   </small></p>
-  <p>{% trans "Ok," %} <a href="{% url 'schemas_customers:create' %}">{% trans "create the site for me." %}</a></p>
+
+  <h2>{% trans "I want try it and have my own website." %}</h2>
+  <p>{% trans "Ok," %} <a href="{% url 'schemas_customers:create' %}" class="btn btn-success">
+    {% trans "create the website for me." %}
+  </a></p>
 
   {% if clients %}
-    <h2>{% trans "Please visit pages of our customers:" %}</h2>
+    <h3>{% trans "Please visit pages of our customers:" %}</h3>
 
-    <table>
+    <div class="btn-group-vertical">
     {% for client in clients %}
-      <tr><td>
-        <a href="{{ client.url }}">{{ client.name }}</a>
-      </td></tr>
+      <a href="{{ client.url }}" class="text-left btn btn-light" role="button">
+        {{ client.name }}
+      </a>
     {% endfor %}
-    </table>
+    </div>
 
     {% include 'utils/pagination.html' with current_list='schemas_customers:list' %}
   {% endif %}

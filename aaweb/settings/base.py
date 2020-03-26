@@ -16,6 +16,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 from configparser import RawConfigParser   #mz ++
 
+from django.contrib.messages import constants
+
 #mz ++
 config = RawConfigParser()
 config['DEFAULT'] = {'SQLITE': ''}   # '' (~False) --or-- True
@@ -333,6 +335,11 @@ LOGGING = {
             'propagate': False,
         },
     }
+}
+
+MESSAGE_TAGS = {
+    constants.ERROR: '',
+    40: 'danger',
 }
 
 # Wagtail settings
