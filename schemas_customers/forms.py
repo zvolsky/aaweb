@@ -5,7 +5,7 @@ from .models import Client
 
 
 class ClientCreateForm(forms.ModelForm):
-    success_url = reverse_lazy('schemas_customers:list')
+    success_url = reverse_lazy('schemas_customers:home')
 
     class Meta:
         model = Client

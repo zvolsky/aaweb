@@ -87,6 +87,7 @@ SHARED_APPS = [
     'compressor',
     'django_extensions',
     'django_b2',
+    'widget_tweaks',
 
     'common',
     'accounts',
@@ -126,6 +127,7 @@ INSTALLED_APPS = [
     'compressor',
     'django_extensions',
     'django_b2',
+    'widget_tweaks',
 
     'common',
     'accounts',

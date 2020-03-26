@@ -28,6 +28,7 @@ django-modelcluster==5.0.1  # via wagtail
 django-taggit==1.2.0      # via wagtail
 django-tenant-schemas==1.10.0  # via -r requirements/base.pip
 django-treebeard==4.3.1   # via wagtail
+django-widget-tweaks==1.4.8  # via -r requirements/base.pip
 django==3.0.4             # via -r requirements/base.pip, django-appconf, django-debug-toolbar, django-taggit, django-tenant-schemas, django-treebeard, djangorestframework, wagtail
 djangorestframework==3.11.0  # via wagtail
 draftjs-exporter==2.1.7   # via wagtail
