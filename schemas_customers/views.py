@@ -60,5 +60,7 @@ class ClientCreate(CreateView):
             self.client.user = user
             self.client.save()
         else:   # AnonymousUser
-            messages.error(self.request, _('Cannot create the website: You are not logged in.'))
+            messages.error(self.request, _('Cannot create the website: You are not logged in.') +
+                    ' <a href="{% url "accounts:login" %}">' + _('Please log in first.') + '</a>',
+                    extra_tags='safe')
         return redirect(form.success_url)
