@@ -221,6 +221,7 @@ DATABASES = {
 '''
 
 AUTH_USER_MODEL = 'users.User'
+LOGIN_REDIRECT_URL = 'schemas_customers:home'
 LOGOUT_REDIRECT_URL = 'schemas_customers:home'
 
 # Password validation
