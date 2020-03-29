@@ -19,7 +19,9 @@
           {% include 'common/form.html' %}
           <div class="text-center py-2">
             <small>
-              <a href="#" class="text-muted">{% trans 'Forgot your password?' %}</a>
+              <a href="{% url 'accounts:password_reset' %}" class="text-muted">
+                {% trans 'Forgot your password?' %}
+              </a>
             </small>
           </div>
           <button type="submit" class="btn btn-primary">{% trans 'Log in' %}</button>
