@@ -11,3 +11,5 @@ django-compressor
 whitenoise[brotli]
 
 colorlog
+pytest-django
+

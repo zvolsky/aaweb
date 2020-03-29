@@ -1,6 +1,8 @@
 import logging
 
 from django.contrib import messages
+from django.contrib.auth import get_user_model
+#User = get_user_model()
 from django.http.response import Http404
 from django.shortcuts import redirect  # , render
 from django.utils.translation import gettext as _
@@ -8,8 +10,6 @@ from django.views.generic import CreateView, ListView
 
 from .forms import ClientCreateForm
 from .models import Client
-
-from accounts.models import User
 
 
 log = logging.getLogger(__name__)
@@ -56,7 +56,7 @@ class ClientCreate(CreateView):
 
     def form_valid(self, form):
         user = self.request.user  # django.contrib.auth.models.AnonymousUser or .User
-        if isinstance(user, User):
+        if isinstance(user, get_user_model()):
             self.client = form.save(commit=False)
             self.client.user = user
             self.client.save()
