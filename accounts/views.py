@@ -6,18 +6,23 @@ from django.urls import reverse_lazy
 from users.forms import CustomUserCreationForm
 
 
-class CustomPasswordResetDoneView(auth_views.PasswordResetDoneView):
+class AddHomeUrlMixin:
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['home_url'] = settings.HOME_URL
         return context
 
 
-class CustomPasswordResetCompleteView(auth_views.PasswordResetCompleteView):
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['home_url'] = settings.HOME_URL
-        return context
+class CustomPasswordResetDoneView(AddHomeUrlMixin, auth_views.PasswordResetDoneView):
+    pass
+
+
+class CustomPasswordResetCompleteView(AddHomeUrlMixin, auth_views.PasswordResetCompleteView):
+    pass
+
+
+class CustomPasswordChangeDoneView(AddHomeUrlMixin, auth_views.PasswordChangeDoneView):
+    pass
 
 
 def signup(request):

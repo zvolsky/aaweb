@@ -48,7 +48,7 @@ class ClientList(ListView):
     """
 
 
-# https://www.agiliq.com/blog/2019/01/django-createview/ (a little: shit)
+# https://www.agiliq.com/blog/2019/01/django-createview/ (with lot of mistakes)
 class ClientCreate(CreateView):
     model = Client
     form_class = ClientCreateForm

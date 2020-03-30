@@ -221,8 +221,8 @@ DATABASES = {
 '''
 
 AUTH_USER_MODEL = 'users.User'
-
-# custom settings used in accounts/ app
+LOGIN_URL = 'accounts:login'
+# custom settings used in 'accounts' app
 HOME_URL = 'schemas_customers:home'
 LOGIN_REDIRECT_URL = HOME_URL
 LOGOUT_REDIRECT_URL = HOME_URL

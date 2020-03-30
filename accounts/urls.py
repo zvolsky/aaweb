@@ -10,6 +10,7 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='accounts/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 
+    # send me a username, I am not sure if I use a correct one
     path('get_username/',
         auth_views.PasswordResetView.as_view(
             template_name='accounts/pwd/get_username.html',
@@ -22,6 +23,7 @@ urlpatterns = [
         accounts_views.CustomPasswordResetDoneView.as_view(template_name='accounts/pwd/get_username_done.html'),
         name='get_username_done'),
 
+    # send me a link with possibility change my password while I am not logged in
     path('reset/',
         auth_views.PasswordResetView.as_view(
             template_name='accounts/pwd/reset.html',
@@ -42,4 +44,15 @@ urlpatterns = [
     path('reset/complete/',
         accounts_views.CustomPasswordResetCompleteView.as_view(template_name='accounts/pwd/reset_complete.html'),
         name='password_reset_complete'),
+
+    # change the password while I am logged
+    path('settings/password/',
+        auth_views.PasswordChangeView.as_view(
+            template_name='accounts/pwd/change.html',
+            success_url = reverse_lazy('accounts:password_change_done')
+        ),
+        name='password_change'),
+    path('settings/password/done/',
+        accounts_views.CustomPasswordChangeDoneView.as_view(template_name='accounts/pwd/change_done.html'),
+        name='password_change_done'),
 ]
