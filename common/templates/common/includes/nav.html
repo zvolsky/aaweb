@@ -14,7 +14,9 @@
                 {{ user.username }}
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu">
-                <a class="dropdown-item" href="#">{% trans 'My account' %}</a>
+                <a class="dropdown-item" href="{% url 'users:update_profile' %}">
+                  {% trans 'My profile' %}
+                </a>
                 <a class="dropdown-item" href="{% url 'accounts:password_change' %}">
                   {% trans 'Change password' %}
                 </a>

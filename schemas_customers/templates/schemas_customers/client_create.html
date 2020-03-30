@@ -12,7 +12,7 @@
   <form method="post" id="createForm">
     {% csrf_token %}
     {% include 'common/form.html' %}
-    <button type="submit" id="submitBtn">{% trans 'Submit' %}</button>
+    <button type="submit" id="submitBtn" class="btn btn-primary">{% trans 'Create website' %}</button>
   </form>
 
   <p class="d-none breadcrumb breadcrumb-warning" id="submittedMsg">

@@ -17,6 +17,7 @@
         <form method="post">
           {% csrf_token %}
           {% include 'common/form.html' %}
+          <button type="submit" class="btn btn-primary">{% trans 'Log in' %}</button>
           <div class="text-center py-2">
             <small>
               <a href="{% url 'accounts:get_username' %}" class="text-muted">
@@ -31,7 +32,6 @@
               </a>
             </small>
           </div>
-          <button type="submit" class="btn btn-primary">{% trans 'Log in' %}</button>
         </form>
       </div>
     </div>

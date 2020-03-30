@@ -17,6 +17,7 @@ urlpatterns.extend(
     i18n_patterns(
         path('', include(('schemas_customers.urls_i18n', 'schemas_customers'), namespace='schemas_customers')),
         path('accounts/', include(('accounts.urls', 'accounts'), namespace='accounts')),
+        path('users/', include(('users.urls', 'users'), namespace='users')),
     )
 )
 

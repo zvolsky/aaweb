@@ -1,9 +1,8 @@
 from django.conf import settings
 from django.contrib.auth import login, views as auth_views
 from django.shortcuts import redirect, render
-from django.urls import reverse_lazy
 
-from users.forms import CustomUserCreationForm
+from users.forms import CustomUserCreationForm   # TODO: users vs accounts?
 
 
 class AddHomeUrlMixin:
@@ -25,7 +24,7 @@ class CustomPasswordChangeDoneView(AddHomeUrlMixin, auth_views.PasswordChangeDon
     pass
 
 
-def signup(request):
+def signup(request):    # TODO: accounts vs users (which owns CustomUserCreationForm)?
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
