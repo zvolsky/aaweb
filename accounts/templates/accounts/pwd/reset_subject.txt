@@ -1,1 +1,1 @@
-{% load i18n %}{% trans 'Possibility to change your password' %}
+{% load i18n %}[{{ domain }}] {% trans 'asked: change your password' %}

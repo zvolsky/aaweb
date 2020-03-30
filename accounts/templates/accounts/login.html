@@ -19,6 +19,13 @@
           {% include 'common/form.html' %}
           <div class="text-center py-2">
             <small>
+              <a href="{% url 'accounts:get_username' %}" class="text-muted">
+                {% trans 'Forgot your username?' %}
+              </a>
+            </small>
+          </div>
+          <div class="text-center py-2">
+            <small>
               <a href="{% url 'accounts:password_reset' %}" class="text-muted">
                 {% trans 'Forgot your password?' %}
               </a>

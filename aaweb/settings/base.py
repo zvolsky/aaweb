@@ -221,8 +221,11 @@ DATABASES = {
 '''
 
 AUTH_USER_MODEL = 'users.User'
-LOGIN_REDIRECT_URL = 'schemas_customers:home'
-LOGOUT_REDIRECT_URL = 'schemas_customers:home'
+
+# custom settings used in accounts/ app
+HOME_URL = 'schemas_customers:home'
+LOGIN_REDIRECT_URL = HOME_URL
+LOGOUT_REDIRECT_URL = HOME_URL
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

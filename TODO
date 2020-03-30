@@ -1,11 +1,8 @@
 accounts:
 
-vynechány 2 refactory
+vynechány 3 refactory
   sjednocení login a signup templaty
   template_tags
 
-asi do půlky obnova hesla
-
 maily chodí pro myum
-text mailu není lokalizován
 
