@@ -55,6 +55,7 @@ TENANT_APPS = [
     'blog',
     'search',
 
+    'wagtail',
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
     'wagtail.embeds',
@@ -102,6 +103,7 @@ INSTALLED_APPS = [
     'blog',
     'search',
 
+    'wagtail',
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
     'wagtail.embeds',
