@@ -5,6 +5,7 @@ from django.contrib.auth import get_user_model
 #User = get_user_model()
 from django.http.response import Http404
 from django.shortcuts import redirect  # , render
+from django.urls import reverse
 from django.utils.translation import gettext as _
 from django.views.generic import CreateView, ListView
 
@@ -62,6 +63,6 @@ class ClientCreate(CreateView):
             self.client.save()
         else:   # AnonymousUser
             messages.error(self.request, _('Cannot create the website: You are not logged in.') +
-                    ' <a href="{% url "accounts:login" %}">' + _('Please log in first.') + '</a>',
+                    ' <a href="%s">' % reverse("accounts:login") + _('Please log in first.') + '</a>',
                     extra_tags='safe')
         return redirect(form.success_url)
