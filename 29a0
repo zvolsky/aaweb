@@ -1,0 +1,49 @@
+Traceback (most recent call last):
+  File "./manage.py", line 10, in <module>
+    execute_from_command_line(sys.argv)
+  File "/home/mirek/.virtualenvs/aaweb/lib/python3.7/site-packages/django/core/management/__init__.py", line 401, in execute_from_command_line
+    utility.execute()
+  File "/home/mirek/.virtualenvs/aaweb/lib/python3.7/site-packages/django/core/management/__init__.py", line 395, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/home/mirek/.virtualenvs/aaweb/lib/python3.7/site-packages/django/core/management/base.py", line 328, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/home/mirek/.virtualenvs/aaweb/lib/python3.7/site-packages/django/core/management/base.py", line 369, in execute
+    output = self.handle(*args, **options)
+  File "/home/mirek/.virtualenvs/aaweb/lib/python3.7/site-packages/tenant_schemas/management/commands/migrate_schemas.py", line 32, in handle
+    executor.run_migrations(tenants=[self.schema_name])
+  File "/home/mirek/.virtualenvs/aaweb/lib/python3.7/site-packages/tenant_schemas/migration_executors/base.py", line 58, in run_migrations
+    run_migrations(self.args, self.options, self.codename, public_schema_name)
+  File "/home/mirek/.virtualenvs/aaweb/lib/python3.7/site-packages/tenant_schemas/migration_executors/base.py", line 31, in run_migrations
+    MigrateCommand(stdout=stdout, stderr=stderr).execute(*args, **options)
+  File "/home/mirek/.virtualenvs/aaweb/lib/python3.7/site-packages/django/core/management/base.py", line 369, in execute
+    output = self.handle(*args, **options)
+  File "/home/mirek/.virtualenvs/aaweb/lib/python3.7/site-packages/django/core/management/base.py", line 83, in wrapped
+    res = handle_func(*args, **kwargs)
+  File "/home/mirek/.virtualenvs/aaweb/lib/python3.7/site-packages/django/core/management/commands/migrate.py", line 233, in handle
+    fake_initial=fake_initial,
+  File "/home/mirek/.virtualenvs/aaweb/lib/python3.7/site-packages/django/db/migrations/executor.py", line 117, in migrate
+    state = self._migrate_all_forwards(state, plan, full_plan, fake=fake, fake_initial=fake_initial)
+  File "/home/mirek/.virtualenvs/aaweb/lib/python3.7/site-packages/django/db/migrations/executor.py", line 147, in _migrate_all_forwards
+    state = self.apply_migration(state, migration, fake=fake, fake_initial=fake_initial)
+  File "/home/mirek/.virtualenvs/aaweb/lib/python3.7/site-packages/django/db/migrations/executor.py", line 245, in apply_migration
+    state = migration.apply(state, schema_editor)
+  File "/home/mirek/.virtualenvs/aaweb/lib/python3.7/site-packages/django/db/migrations/migration.py", line 124, in apply
+    operation.database_forwards(self.app_label, schema_editor, old_state, project_state)
+  File "/home/mirek/.virtualenvs/aaweb/lib/python3.7/site-packages/django/db/migrations/operations/fields.py", line 112, in database_forwards
+    field,
+  File "/home/mirek/.virtualenvs/aaweb/lib/python3.7/site-packages/django/db/backends/base/schema.py", line 450, in add_field
+    definition, params = self.column_sql(model, field, include_default=True)
+  File "/home/mirek/.virtualenvs/aaweb/lib/python3.7/site-packages/django/db/backends/base/schema.py", line 223, in column_sql
+    default_value = self.effective_default(field)
+  File "/home/mirek/.virtualenvs/aaweb/lib/python3.7/site-packages/django/db/backends/base/schema.py", line 303, in effective_default
+    return field.get_db_prep_save(self._effective_default(field), self.connection)
+  File "/home/mirek/.virtualenvs/aaweb/lib/python3.7/site-packages/django/db/backends/base/schema.py", line 282, in _effective_default
+    default = field.get_default()
+  File "/home/mirek/.virtualenvs/aaweb/lib/python3.7/site-packages/django/db/models/fields/related.py", line 928, in get_default
+    field_default = super().get_default()
+  File "/home/mirek/.virtualenvs/aaweb/lib/python3.7/site-packages/django/db/models/fields/__init__.py", line 829, in get_default
+    return self._get_default()
+  File "/home/mirek/.virtualenvs/aaweb/lib/python3.7/site-packages/wagtail/core/models.py", line 2225, in get_root_collection_id
+    return Collection.get_first_root_node().id
+AttributeError: 'NoneType' object has no attribute 'id'
+ 

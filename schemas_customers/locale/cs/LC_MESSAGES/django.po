@@ -1,0 +1,137 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-03-31 15:34+0200\n"
+"PO-Revision-Date: 2020-03-31 15:47+0200\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n "
+"<= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.3\n"
+
+#: templates/schemas_customers/client_create.html:10
+msgid "Create your website"
+msgstr ""
+
+#: templates/schemas_customers/client_create.html:15
+msgid "Create website"
+msgstr "Vytvořit webové stránky"
+
+#: templates/schemas_customers/client_create.html:19
+msgid "Please be patient, this will take a while."
+msgstr "Prosím, počkejte, bude to chvilku trvat"
+
+#: templates/schemas_customers/clients.html:8
+msgid "CMS Websites for free"
+msgstr "Webové stránky s CMS zdarma"
+
+#: templates/schemas_customers/clients.html:10
+msgid "What means CMS?"
+msgstr "Co znamená CMS?"
+
+#: templates/schemas_customers/clients.html:11
+msgid "CMS is Content Management System."
+msgstr "CMS znamená Content Management Sytem."
+
+#: templates/schemas_customers/clients.html:12
+msgid ""
+"You can insert and change your content without knowledges of server and "
+"browser programming."
+msgstr ""
+"Můžete snadno vkládat a měnit svůj obsah aniž byste k tomu potřeboval(a) "
+"znát programování pro server i prohlížeč."
+
+#: templates/schemas_customers/clients.html:13
+msgid "Just write text and add pictures."
+msgstr "Jednoduše pište text a přidávejte obrázky."
+
+#: templates/schemas_customers/clients.html:16
+msgid "Is it really for free?"
+msgstr "Je to opravdu zadarmo?"
+
+#: templates/schemas_customers/clients.html:18
+msgid "Yes this is really for free at least for pages you create at now."
+msgstr "Ano, je to zadarmo, alespoň pro stránky, které si založíte teď."
+
+#: templates/schemas_customers/clients.html:19
+msgid ""
+"However at this time it is just a testing operation here. We have not much "
+"info and guaranties for you."
+msgstr ""
+"Ale toto je nyní zde pouze testovací provoz. Nemáme pro Vás mnoho informací, "
+"ani záruk."
+
+#: templates/schemas_customers/clients.html:20
+msgid ""
+"We hope we will give you some guarantie for at least 2 years of operation of "
+"your pages but at this time we could hope only that your pages will survive: "
+"We can stop the operation for now immediately, from any reason and without "
+"any warning."
+msgstr ""
+"Doufáme, že Vám poskytneme záruku alespoň 2 budoucích let fungování Vašich "
+"stránek, ale zatím můžeme jen doufat, že se to povede: Zatím ještě si "
+"vyhrazujeme právo zastavit tento web kdykoli, z jakéhokoli důvodu a bez "
+"jakéhokoli varování. "
+
+#: templates/schemas_customers/clients.html:21
+msgid ""
+"The size of (free) pages and especially the size of uploaded media will be "
+"limited almost sure in the future."
+msgstr ""
+"Celkový rozsah webu zdarma a zejména velikost nahraných médií budou téměř "
+"jistě v budoucnu limitovány."
+
+#: templates/schemas_customers/clients.html:23
+msgid ""
+"But if this project will have success we sure give some free program to you, "
+"our early visitors."
+msgstr ""
+"Ale pokud tento projekt bude úspěšný, určitě Vám nabídneme nějaký program "
+"zdarma, jakožto našim prvním návštěvníkům (a tedy i testerům)."
+
+#: templates/schemas_customers/clients.html:26
+msgid "I want try it and have my own website."
+msgstr "Chtěl(a) bych to zkusit a mít své webové stránky."
+
+#: templates/schemas_customers/clients.html:27
+msgid "Ok,"
+msgstr "Ok,"
+
+#: templates/schemas_customers/clients.html:28
+msgid "create the website for me."
+msgstr "vytvořte mi moje stránky."
+
+#: templates/schemas_customers/clients.html:32
+msgid "Please visit pages of our customers:"
+msgstr "Prosím, můžete se podívat na stránky našich zákazníků:"
+
+#: templates/utils/pagination.html:8
+msgid "previous"
+msgstr "předchozí"
+
+#: templates/utils/pagination.html:13
+#, python-format
+msgid "Page %(number)s of %(num_pages)s"
+msgstr "Strana %(number)s z %(num_pages)s"
+
+#: templates/utils/pagination.html:18
+msgid "next"
+msgstr "další"
+
+#: views.py:65
+msgid "Cannot create the website: You are not logged in."
+msgstr "Webové stránky nemůžeme vytvořit: Nejste přihlášen."
+
+#: views.py:66
+msgid "Please log in first."
+msgstr "Prosím, nejprve se přihlaste."
