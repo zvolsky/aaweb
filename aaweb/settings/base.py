@@ -140,9 +140,9 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',      #mz ++
     'django.middleware.security.SecurityMiddleware',   #mz ++ moved from bellow
-    #'tenant_schemas.middleware.TenantMiddleware',      #mz ++
-    'tenant_schemas.middleware.SuspiciousTenantMiddleware',
-    # 'tenant_schemas.middleware.DefaultTenantMiddleware',  # can be subclassed to rename DEFAULT_SCHEMA
+    #'tenant_schemas.middleware.TenantMiddleware',      # (for unknown tenant:) 404 Not Found
+    #'tenant_schemas.middleware.SuspiciousTenantMiddleware',  # 400 DisallowedHost
+    'tenant_schemas.middleware.DefaultTenantMiddleware',  # uses DEFAULT_SCHEMA (can be subclassed to rename it)
     #'whitenoise.middleware.WhiteNoiseMiddleware',      #mz ++
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
