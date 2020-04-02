@@ -42,61 +42,24 @@ DEV_TMP_DIR = os.path.join(BASE_DIR, '.devtmp')
 # certifikáty:
 # https://www.codementor.io/@pauloscardine/15-minute-guide-to-secure-saas-multitenancy-with-django-and-let-s-encrypt-ijtlarca8
 #mz ++
-TENANT_MODEL = "schemas_customers.Client"
+TENANT_MODEL = "schemas_customers.Tenant"
 PG_EXTRA_SEARCH_PATHS = ['extensions']   # must be commented out for re-creating database, before migrate_schemas --shared
 # 2020-02-17 made PR for this, would be accepted?
 
-#mz ++
-TENANT_APPS = [
-    'django.contrib.contenttypes',
-
-    # your tenant-specific apps
-    'home',
-    'blog',
-    'search',
-
-    'wagtail',
-    'wagtail.contrib.forms',
-    'wagtail.contrib.redirects',
-    'wagtail.embeds',
-    'wagtail.sites',
-    'wagtail.users',
-    'wagtail.snippets',
-    'wagtail.documents',
-    'wagtail.images',
-    'wagtail.search',
-    'wagtail.admin',
-    'wagtail.core',
-
-    'modelcluster',
-    'taggit',
-]
+AUTH_USER_MODEL = 'users.User'
+LOGIN_URL = 'accounts:login'
+# custom settings used in 'accounts' app
+HOME_URL = 'schemas_customers:home'
+LOGIN_REDIRECT_URL = HOME_URL
+LOGOUT_REDIRECT_URL = HOME_URL
 
 #mz ++
-SHARED_APPS = [
-    'tenant_schemas',     # mandatory, should always be before any django app
-    'schemas_customers',  # you must list the app where your tenant model resides in
-] + TENANT_APPS + [
-    #'django.contrib.contenttypes',  # would be duplicate if we add TENANT_APPS
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-
-    'compressor',
-    'django_extensions',
-    'django_b2',
-    'widget_tweaks',
-
-    'common',
-    'accounts',
-    'users',
-]
-
 INSTALLED_APPS = [
     'tenant_schemas',  # mandatory, should always be before any django app
+
+    'users',  # users.User earlier before all models which uses them
+    'common',
+    'accounts',
     'schemas_customers',
 
     'home',
@@ -131,10 +94,53 @@ INSTALLED_APPS = [
     'django_extensions',
     'django_b2',
     'widget_tweaks',
+]
+TENANT_APPS = [
+    'django.contrib.contenttypes',
 
+    # your tenant-specific apps
+    'home',
+    'blog',
+    'search',
+
+    'wagtail',
+    'wagtail.contrib.forms',
+    'wagtail.contrib.redirects',
+    'wagtail.embeds',
+    'wagtail.sites',
+    'wagtail.users',
+    'wagtail.snippets',
+    'wagtail.documents',
+    'wagtail.images',
+    'wagtail.search',
+    'wagtail.admin',
+    'wagtail.core',
+
+    'modelcluster',
+    'taggit',
+]
+
+#mz ++
+SHARED_APPS = [
+    'tenant_schemas',     # mandatory, should always be before any django app
+
+    'users',  # users.User earlier before all models which uses them
     'common',
     'accounts',
-    'users',
+    'schemas_customers',  # you must list the app where your tenant model resides in
+] + TENANT_APPS + [
+    #'django.contrib.contenttypes',  # would be duplicate if we add TENANT_APPS
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+
+    'compressor',
+    'django_extensions',
+    'django_b2',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -221,13 +227,6 @@ DATABASES = {
     }
 }
 '''
-
-AUTH_USER_MODEL = 'users.User'
-LOGIN_URL = 'accounts:login'
-# custom settings used in 'accounts' app
-HOME_URL = 'schemas_customers:home'
-LOGIN_REDIRECT_URL = HOME_URL
-LOGOUT_REDIRECT_URL = HOME_URL
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

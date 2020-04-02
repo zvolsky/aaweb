@@ -12,7 +12,7 @@ urlpatterns = [
     # aaweb/schemas_customers non-i18n urls (? all, that is not needed for search engines ?)
     path('', include('schemas_customers.urls')),
 ]
-
+# TODO: init_this_project url
 urlpatterns.extend(
     i18n_patterns(
         path('', include(('schemas_customers.urls_i18n', 'schemas_customers'), namespace='schemas_customers')),
