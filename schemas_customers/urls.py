@@ -3,6 +3,6 @@ from django.urls import include, path
 from schemas_customers import views
 
 urlpatterns = [
-    # home page
-    #path('', views.IndexView.as_view(), name='index'),
+    path('', views.TenantList.as_view(), name='home'),
+    path('create/', views.TenantCreate.as_view(), name='create'),
 ]

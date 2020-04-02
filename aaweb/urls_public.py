@@ -8,16 +8,14 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^django-admin/', admin.site.urls),
     url(r'^admin/', admin.site.urls),
-
-    # aaweb/schemas_customers non-i18n urls (? all, that is not needed for search engines ?)
-    path('', include('schemas_customers.urls')),
 ]
-# TODO: init_this_project url
+
 urlpatterns.extend(
     i18n_patterns(
-        path('', include(('schemas_customers.urls_i18n', 'schemas_customers'), namespace='schemas_customers')),
         path('accounts/', include(('accounts.urls', 'accounts'), namespace='accounts')),
         path('users/', include(('users.urls', 'users'), namespace='users')),
+        # poslední, doufám, že jen a právě takto lze použít include()
+        path('', include(('schemas_customers.urls', 'schemas_customers'), namespace='schemas_customers')),
     )
 )
 

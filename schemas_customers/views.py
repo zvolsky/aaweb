@@ -3,9 +3,11 @@ import logging
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 #User = get_user_model()
+from django.contrib.auth.decorators import login_required
 from django.http.response import Http404
 from django.shortcuts import redirect  # , render
 from django.urls import reverse
+from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
 from django.views.generic import CreateView, ListView
 
@@ -48,28 +50,13 @@ class TenantList(ListView):
         return context
     """
 
-def init_this_project(request):
-    host = request.get_host().split(':',1)[:1]
-    tenant = Tenant(domain_url=host, schema_name='public', name='public')
-    tenant.save()
-    return redirect('schemas_customers:clients')
-
 
 # https://www.agiliq.com/blog/2019/01/django-createview/ (with lot of mistakes)
+@method_decorator(login_required, name='dispatch')
 class TenantCreate(CreateView):
     model = Tenant
     form_class = TenantCreateForm
     template_name = "schemas_customers/tenant_create.html"
-
-    def get_initial(self, *args, **kwargs):
-        initial = super().get_initial(*args, **kwargs)
-        user = self.request.user  # django.contrib.auth.models.AnonymousUser or .User
-        if not isinstance(user, get_user_model()):
-            messages.error(self.request, _('Cannot create the website: You are not logged in.') +
-                    ' <a href="%s">' % reverse("accounts:login") + _('Please log in first.') + '</a>',
-                    extra_tags='safe')
-            return redirect('schemas_customers:clients')
-        return initial
 
     def form_valid(self, form):
         user = self.request.user  # django.contrib.auth.models.AnonymousUser or .User
