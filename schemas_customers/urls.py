@@ -1,4 +1,4 @@
-from django.urls import include, path
+from django.urls import path
 
 from schemas_customers import views
 
