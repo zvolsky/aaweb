@@ -13,8 +13,9 @@ def validate_tenant_name(value):
 
 
 class Tenant(TenantMixin):
-    name = models.SlugField(max_length=100, unique=True, validators=[validate_tenant_name])
-    created_on = models.DateField(auto_now_add=True)
+    name = models.SlugField(_('name'), max_length=100, unique=True, validators=[validate_tenant_name])
+    description = models.TextField(_('description'))
+    created_on = models.DateField(null=True, blank=True)
     user = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):

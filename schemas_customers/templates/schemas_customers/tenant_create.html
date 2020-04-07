@@ -14,12 +14,4 @@
     {% include 'common/form.html' %}
     <button type="submit" id="submitBtn" class="btn btn-primary">{% trans 'Create website' %}</button>
   </form>
-
-  <p class="d-none breadcrumb breadcrumb-warning" id="submittedMsg">
-    {% trans "Please be patient, this will take a while." %}
-  </p>
-{% endblock %}
-
-{% block finaljs %}
-<script src="{% static "schemas_customers/js/client_create.js" %}" defer></script>
 {% endblock %}

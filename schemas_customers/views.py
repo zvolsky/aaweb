@@ -1,15 +1,18 @@
+import base64
 import logging
+import subprocess
 
 from django.contrib import messages
-from django.contrib.auth import get_user_model
+#from django.contrib.auth import get_user_model
 #User = get_user_model()
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from django.http.response import Http404
 from django.shortcuts import redirect  # , render
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, TemplateView
 
 from .forms import TenantCreateForm
 from .models import Tenant
@@ -59,16 +62,50 @@ class TenantCreate(CreateView):
     template_name = "schemas_customers/tenant_create.html"
 
     def form_valid(self, form):
-        user = self.request.user  # django.contrib.auth.models.AnonymousUser or .User
-        if isinstance(user, get_user_model()):
+        user = self.request.user.id
+        subdomain = form.cleaned_data['name']
+        domain = '.'.join(self.request.get_host().split(':', 1)[0].split('.', 2)[-2:])
+        port = self.request.get_port()
+        if port in ('80', '443'):
+            port = ''
+        else:
+            port = f':{port}'
+        self.request.session['expected_web'] = expected_web = f"{subdomain}.{domain}{port}/admin"
+        self.request.session['a_tag'] = f'<a href="{self.request.scheme}://{expected_web}">'
 
-            self.client = form.save(commit=False)
-            self.client.schema_name = self.client.name
-            self.client.domain_url = f"{self.client.name}.{'.'.join(self.request.get_host().rsplit('.', 2)[-2:])}"
-            self.client.user = user
-            self.client.save()
-            return redirect(form.success_url)
-        else:   # AnonymousUser
-            messages.error(self.request, _('Cannot create the website: You are not logged in.') +
-                    ' <a href="%s">' % reverse("accounts:login") + _('Please log in first.') + '</a>',
-                    extra_tags='safe')
+        # replace(' ', ''): in special cases could base64 encoded string contain spaces for readability
+        # (not sure if so while base64 is used)
+        subprocess.Popen(('python', 'manage.py',
+                'create_tenant', '-s', subdomain, '-d', domain, '-u', str(user),
+                '-b', base64.b64encode(form.cleaned_data['description'].encode()).replace(b' ', b'').replace(b'\n', b'')))
+
+        return redirect(form.success_url)
+        # we must finish request first; following or subprocess.run() doesn't work from not exactly known reason
+        '''
+        self.client = form.save(commit=False)
+        self.client.schema_name = self.client.name
+        self.client.domain_url = f"{self.client.name}.{'.'.join(self.request.get_host().rsplit('.', 2)[-2:])}"
+        self.client.user = self.request.user
+        self.client.save()
+        '''
+
+@method_decorator(login_required, name='dispatch')
+class TenantCreating(TemplateView):
+    #extra_context = {...}
+    template_name = "schemas_customers/tenant_creating.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['expected_web'] = self.request.session.get('expected_web')
+        context['a_tag'] = self.request.session.get('a_tag')
+        return context
+
+# ------- ajax -------
+
+def is_site_ready(request, *args, **kwargs):
+    import pdb; pdb.set_trace()
+    ready = Tenant.objects.get(name='xxx')
+    data = {
+        'ready': 'ready' if ready else ''  // True if ready else False
+    }
+    return JsonResponse(data)

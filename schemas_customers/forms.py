@@ -7,8 +7,8 @@ from .models import Tenant
 
 
 class TenantCreateForm(forms.ModelForm):
-    success_url = reverse_lazy('schemas_customers:home')
+    success_url = reverse_lazy('schemas_customers:creating')
 
     class Meta:
         model = Tenant
-        fields = ('name',)
+        fields = ('name', 'description')

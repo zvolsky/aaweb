@@ -1,0 +1,25 @@
+{% extends "aaweb/main_public.html" %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+  {{ block.super }}
+
+  <h1 class="mb-4">{% trans "Creating website" %}</h1>
+
+  <p>
+    {% trans "Please wait, we are creating your website ..." %}
+  </p>
+  <p id="created" class="d-none" data-is-ready-url="{% url 'schemas_customers:is_site_ready' %}">
+    {% blocktrans with a_tag=a_tag|safe %}
+      Done. You can navigate to {{a_tag}}{{expected_web}}</a>
+    {% endblocktrans %}
+  </p>
+{% endblock content %}
+
+{% block finaljs %}
+  {{ block.super }}
+
+  <script src="{% static "schemas_customers/js/tenant_creating.js" %}"></script>
+{% endblock finaljs %}

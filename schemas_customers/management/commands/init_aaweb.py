@@ -25,5 +25,7 @@ class Command(BaseCommand):
                 tenant.save()
 
                 print(f'Public tenant for {host} was initialized.')
+            else:
+                print('Use -l or -d parameter.')
         else:
             print("Already initialized, Tenant model isn't empty.")

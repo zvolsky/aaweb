@@ -29,16 +29,21 @@
   </a></p>
 
   {% if clients %}
-    <h2>{% trans "Please visit pages of our customers:" %}</h2>
+    <p>{% trans "You can see some sites hosted here to better understand what you can easily create:" %}</p>
 
     <div class="btn-group-vertical">
     {% for client in clients %}
-      <a href="{{ client.url }}" class="text-left btn btn-light" role="button">
-        {{ client.name }}
-      </a>
+      <span>
+        <a href="{{ client.url }}" class="text-left btn btn-light" role="button">
+          {{ client.name }}
+        </a>
+        <small>
+          {{ client.description }}
+        </small>
+      </span>
     {% endfor %}
     </div>
 
-    {% include 'utils/pagination.html' with current_list='schemas_customers:list' %}
+    {% include 'utils/pagination.html' with current_list='schemas_customers:home' %}
   {% endif %}
 {% endblock %}

@@ -19,6 +19,9 @@ from configparser import RawConfigParser   #mz ++
 from django.contrib.messages import constants
 
 #mz ++
+OFFLINE = False
+OFFLINE = True  # for debugging, temporarily do not depend on backblaze b2
+
 config = RawConfigParser()
 config['DEFAULT'] = {'SQLITE': ''}   # '' (~False) --or-- True
 config.read('/etc/django/aaweb/env.ini')
@@ -118,6 +121,10 @@ TENANT_APPS = [
 
     'modelcluster',
     'taggit',
+
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
 ]
 
 #mz ++
@@ -303,10 +310,13 @@ WHITENOISE_ROOT = os.path.join(DEV_TMP_DIR, 'static', 'root')
 MEDIA_URL = '/media/'
 #MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_ROOT = os.path.join(DEV_TMP_DIR, 'media')
-if 'tenant_schemas' in INSTALLED_APPS:
-    DEFAULT_FILE_STORAGE = 'django_b2.tenant_storage.TenantB2Storage'
+if OFFLINE:  # allow debugging without internet connection
+    DEFAULT_FILE_STORAGE = 'tenant_schemas.storage.TenantFileSystemStorage'
 else:
-    DEFAULT_FILE_STORAGE = 'django_b2.storage.B2Storage'  # github.com/pyutil/django-b2 (using b2sdk, by zvolsky)
+    if 'tenant_schemas' in INSTALLED_APPS:
+        DEFAULT_FILE_STORAGE = 'django_b2.tenant_storage.TenantB2Storage'
+    else:
+        DEFAULT_FILE_STORAGE = 'django_b2.storage.B2Storage'  # github.com/pyutil/django-b2 (using b2sdk, by zvolsky)
 B2_APP_KEY_ID = os.environ.get('B2_APP_KEY_ID') or config.get('b2', 'B2_APP_KEY_ID')
 B2_APP_KEY = os.environ.get('B2_APP_KEY') or config.get('b2', 'B2_APP_KEY')
 B2_BUCKET_NAME = os.environ.get('B2_BUCKET_NAME') or config.get('b2', 'B2_BUCKET_NAME')
