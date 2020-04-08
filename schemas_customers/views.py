@@ -106,8 +106,8 @@ class TenantCreating(TemplateView):
 # ------- ajax -------
 
 #@csrf_exempt
-def is_site_ready(request):
-    user = request.user  # get_user_model().objects.get(pk=2)
+def is_site_ready(request):  # js: Tenant_Creating.isSiteReady
+    user = request.user  # radši se toho ani nedotýkám a nepřesouvám dolů, viz níže: problémy
     ready = False
     web = request.GET.get('web')
     if web:
@@ -117,14 +117,12 @@ def is_site_ready(request):
         except Tenant.DoesNotExist:
             tenant = None
         if tenant and tenant.created_on:
-            #with schema_context('public'):
-            #    user = get_user_model().objects.get(pk=1)
+            #with schema_context('public'):                      # při ladění divné problémy: AnonymousUser
+            #    user = get_user_model().objects.get(pk=userId)  # pokud znova, přenést userId ajaxem
             with schema_context(tenant.name):
                 if not get_user_model().objects.exists():
                     tenant_user = get_user_model().objects.create_superuser(user.username, user.email, 'tmppwd')
                     tenant_user.password = user.password
-                    #user = get_user_model().objects.get(username=user.username)
-                    #user.pk = None
                     tenant_user.save()
             ready = True
     data = {
