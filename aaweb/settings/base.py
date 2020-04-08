@@ -158,7 +158,8 @@ MIDDLEWARE = [
     #'tenant_schemas.middleware.SuspiciousTenantMiddleware',  # 400 DisallowedHost
     'tenant_schemas.middleware.DefaultTenantMiddleware',  # uses DEFAULT_SCHEMA (can be subclassed to rename it)
     #'whitenoise.middleware.WhiteNoiseMiddleware',
-    'common.middleware.stackoverflow',
+    #not working 'common.middleware.stackoverflow',
+    #not working 'common.middleware.StackOverflow',
     'common.middleware.timing',
 
     'django.contrib.sessions.middleware.SessionMiddleware',
