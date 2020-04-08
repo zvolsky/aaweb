@@ -121,10 +121,11 @@ def is_site_ready(request):
             #    user = get_user_model().objects.get(pk=1)
             with schema_context(tenant.name):
                 if not get_user_model().objects.exists():
-                    get_user_model().objects.create_superuser(user.username, user.email, 'tmppwd')
+                    tenant_user = get_user_model().objects.create_superuser(user.username, user.email, 'tmppwd')
+                    tenant_user.password = user.password
                     #user = get_user_model().objects.get(username=user.username)
                     #user.pk = None
-                    #user.save()
+                    tenant_user.save()
             ready = True
     data = {
         'ready': 'ready' if ready else ''  // True if ready else False

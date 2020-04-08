@@ -151,6 +151,10 @@ SHARED_APPS = [
     'widget_tweaks',
 ]
 
+#PASSWORD_HASHERS = (
+#    'django.contrib.auth.hashers.MD5PasswordHasher',
+#)
+
 MIDDLEWARE = [
     #mz ++
     'whitenoise.middleware.WhiteNoiseMiddleware',

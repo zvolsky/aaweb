@@ -63,7 +63,7 @@ class StackOverflow:
 
 def timing(get_response):
     def middleware(request):
-        print(getattr(request, 'user', '-------'))
+        print(getattr(request, 'user', '-------'))  # debug tool, after AuthenticationMiddleware
         t1 = time.time()
         response = get_response(request)
         t2 = time.time()
