@@ -1,4 +1,5 @@
 Tenant_Creating = function() {
+    this.common = new Common();
     this.timer = null;
 };
 
@@ -17,17 +18,8 @@ Tenant_Creating.prototype = {
         let dataEl = $('p#created');
         let url = dataEl.data('isReadyUrl');
         let request = {'web': dataEl.data('web')};
-        this.ajaxCall(url, request, success.bind(this));  // data-is-ready-url
-    },
-
-    ajaxCall: function(url, request, successFn) {
-      $.ajax({
-        url: url,
-        data: request || {},
-        dataType: 'json',
-        success: successFn
-      });
-    },
+        this.common.ajaxCall(url, request, success.bind(this));  // data-is-ready-url
+    }
 };
 
 tc = new Tenant_Creating();

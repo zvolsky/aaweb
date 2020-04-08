@@ -13,9 +13,9 @@
   </p>
   <p id="created" class="d-none" data-is-ready-url="{% url 'schemas_customers:is_site_ready' %}" data-web="{{expected_web}}">
     {# Translators: Don't change {{.../admin #}
-    {% blocktrans with a_tag=a_tag|safe %}
-      Done. You can navigate to {{a_tag}}{{expected_web}}/admin</a>
-    {% endblocktrans %}
+    {% blocktrans trimmed with a_tag=a_tag|safe %}
+      Done. You can navigate to {{a_tag}}{{expected_web}}/admin
+    {% endblocktrans %}</a>
   </p>
 {% endblock content %}
 
