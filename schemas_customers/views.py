@@ -70,8 +70,8 @@ class TenantCreate(CreateView):
             port = ''
         else:
             port = f':{port}'
-        self.request.session['expected_web'] = expected_web = f"{subdomain}.{domain}{port}/admin"
-        self.request.session['a_tag'] = f'<a href="{self.request.scheme}://{expected_web}">'
+        self.request.session['expected_web'] = expected_web = f"{subdomain}.{domain}{port}"
+        self.request.session['a_tag'] = f'<a href="{self.request.scheme}://{expected_web}/admin">'
 
         # replace(' ', ''): in special cases could base64 encoded string contain spaces for readability
         # (not sure if so while base64 is used)
@@ -102,9 +102,17 @@ class TenantCreating(TemplateView):
 
 # ------- ajax -------
 
-def is_site_ready(request, *args, **kwargs):
-    import pdb; pdb.set_trace()
-    ready = Tenant.objects.get(name='xxx')
+def is_site_ready(request):
+    ready = False
+    web = request.GET.get('web')
+    if web:
+        name = web.split('.', 1)[0]
+        try:
+            tenant = Tenant.objects.get(name=name)
+        except Tenant.DoesNotExist:
+            tenant = None
+        if tenant and tenant.created_on:
+            ready = True
     data = {
         'ready': 'ready' if ready else ''  // True if ready else False
     }

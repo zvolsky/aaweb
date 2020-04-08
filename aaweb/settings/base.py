@@ -151,12 +151,16 @@ SHARED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware',      #mz ++
-    'django.middleware.security.SecurityMiddleware',   #mz ++ moved from bellow
+    #mz ++
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.middleware.security.SecurityMiddleware',   # moved from bellow
     #'tenant_schemas.middleware.TenantMiddleware',      # (for unknown tenant:) 404 Not Found
     #'tenant_schemas.middleware.SuspiciousTenantMiddleware',  # 400 DisallowedHost
     'tenant_schemas.middleware.DefaultTenantMiddleware',  # uses DEFAULT_SCHEMA (can be subclassed to rename it)
-    #'whitenoise.middleware.WhiteNoiseMiddleware',      #mz ++
+    #'whitenoise.middleware.WhiteNoiseMiddleware',
+    'common.middleware.stackoverflow',
+    'common.middleware.timing',
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',

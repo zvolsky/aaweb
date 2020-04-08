@@ -1,31 +1,34 @@
 Tenant_Creating = function() {
+    this.timer = null;
 };
 
 Tenant_Creating.prototype = {
-    ajaxUrl: $('p#created').data;  // data-is-ready-url
     serve: function() {
-        debugger;
+        this.timer = setInterval(this.isSiteReady.bind(this), 10000);
     },
     
     isSiteReady: function() {
+        function success(response) {
+            if (response.ready) {
+                clearInterval(this.timer);
+                $('p#created').removeClass('d-none');
+            }
+        }
+        let dataEl = $('p#created');
+        let url = dataEl.data('isReadyUrl');
+        let request = {'web': dataEl.data('web')};
+        this.ajaxCall(url, request, success.bind(this));  // data-is-ready-url
+    },
+
+    ajaxCall: function(url, request, successFn) {
       $.ajax({
-        url: '/ajax/is_site_ready/',
-        //data: {
-        //  'username': username
-        //},
+        url: url,
+        data: request || {},
         dataType: 'json',
-        success: (function (data) {
-          if (data.is_ready) {
-            this.onReady();
-          }
-        }).bind(this);
+        success: successFn
       });
     },
-    
-    onReady: function() {
-
-    }
 };
-debugger;
+
 tc = new Tenant_Creating();
 tc.serve();
