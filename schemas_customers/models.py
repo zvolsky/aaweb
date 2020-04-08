@@ -17,6 +17,7 @@ class Tenant(TenantMixin):
     description = models.TextField(_('description'))
     created_on = models.DateField(null=True, blank=True)
     user = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, null=True, blank=True)
+    publicly = models.BooleanField(_('I agree that the link to my website can be publicly shown on main page of this web.'), default=True)
 
     def __str__(self):
         return self.name

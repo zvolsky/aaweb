@@ -30,7 +30,7 @@ class TenantList(ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        clients = Tenant.objects.exclude(name='public')
+        clients = Tenant.objects.exclude(name='public').filter(publicly=True)
         for client in clients:
             client.url = '%s://%s' % (self.request.scheme,
                                       '.'.join([client.name] + self.request.get_host().split('.')[-2:]))

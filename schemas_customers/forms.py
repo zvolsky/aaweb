@@ -11,4 +11,4 @@ class TenantCreateForm(forms.ModelForm):
 
     class Meta:
         model = Tenant
-        fields = ('name', 'description')
+        fields = ('name', 'description', 'publicly')

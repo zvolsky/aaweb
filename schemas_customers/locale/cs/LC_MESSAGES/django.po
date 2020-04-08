@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-08 15:50+0200\n"
-"PO-Revision-Date: 2020-04-08 15:50+0200\n"
+"POT-Creation-Date: 2020-04-08 16:01+0200\n"
+"PO-Revision-Date: 2020-04-08 16:02+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: cs\n"
@@ -30,6 +30,14 @@ msgstr "jméno"
 #: schemas_customers/models.py:17
 msgid "description"
 msgstr "popis"
+
+#: schemas_customers/models.py:20
+msgid ""
+"I agree that the link to my website can be publicly shown on main page of "
+"this web."
+msgstr ""
+"Souhlasím, že odkaz na moje stránky může být zobrazen veřejně na hlavní "
+"stránce tohoto webu."
 
 #: schemas_customers/templates/schemas_customers/clients.html:8
 msgid "CMS Websites for free"

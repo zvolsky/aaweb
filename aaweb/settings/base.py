@@ -20,7 +20,7 @@ from django.contrib.messages import constants
 
 #mz ++
 OFFLINE = False
-OFFLINE = True  # for debugging, temporarily do not depend on backblaze b2
+#OFFLINE = True  # for debugging, temporarily do not depend on backblaze b2
 
 config = RawConfigParser()
 config['DEFAULT'] = {'SQLITE': ''}   # '' (~False) --or-- True
