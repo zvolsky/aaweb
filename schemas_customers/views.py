@@ -2,8 +2,10 @@ import base64
 import logging
 import subprocess
 
+from tenant_schemas.utils import schema_context
+
 from django.contrib import messages
-#from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model
 #User = get_user_model()
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
@@ -12,6 +14,7 @@ from django.shortcuts import redirect  # , render
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
+#from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView, ListView, TemplateView
 
 from .forms import TenantCreateForm
@@ -102,7 +105,9 @@ class TenantCreating(TemplateView):
 
 # ------- ajax -------
 
+#@csrf_exempt
 def is_site_ready(request):
+    user = request.user  # get_user_model().objects.get(pk=2)
     ready = False
     web = request.GET.get('web')
     if web:
@@ -112,6 +117,14 @@ def is_site_ready(request):
         except Tenant.DoesNotExist:
             tenant = None
         if tenant and tenant.created_on:
+            #with schema_context('public'):
+            #    user = get_user_model().objects.get(pk=1)
+            with schema_context(tenant.name):
+                if not get_user_model().objects.exists():
+                    get_user_model().objects.create_superuser(user.username, user.email, 'tmppwd')
+                    #user = get_user_model().objects.get(username=user.username)
+                    #user.pk = None
+                    #user.save()
             ready = True
     data = {
         'ready': 'ready' if ready else ''  // True if ready else False

@@ -99,6 +99,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
 ]
 TENANT_APPS = [
+    'users',  # users.User earlier before all models which uses them
     'django.contrib.contenttypes',
 
     # your tenant-specific apps
@@ -122,9 +123,9 @@ TENANT_APPS = [
     'modelcluster',
     'taggit',
 
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
+    #'django.contrib.auth',
+    #'django.contrib.contenttypes',
+    #'django.contrib.sessions',
 ]
 
 #mz ++
@@ -160,13 +161,13 @@ MIDDLEWARE = [
     #'whitenoise.middleware.WhiteNoiseMiddleware',
     #not working 'common.middleware.stackoverflow',
     #not working 'common.middleware.StackOverflow',
-    'common.middleware.timing',
 
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'common.middleware.timing',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     #mz -- 'django.middleware.security.SecurityMiddleware',

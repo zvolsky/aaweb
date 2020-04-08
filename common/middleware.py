@@ -63,6 +63,7 @@ class StackOverflow:
 
 def timing(get_response):
     def middleware(request):
+        print(getattr(request, 'user', '-------'))
         t1 = time.time()
         response = get_response(request)
         t2 = time.time()

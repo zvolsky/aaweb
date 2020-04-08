@@ -13,7 +13,22 @@ class Command(BaseCommand):
         parser.add_argument('-d', '--domain', type=str,
                 help="initialize production tenant (example: aaweb.eu)")
 
+        parser.add_argument('-t', '--test', type=str)
+
     def handle(self, *_args, **options):
+        if options['test']:
+            from tenant_schemas.utils import schema_context
+            from django.contrib.auth import get_user_model
+            import pdb; pdb.set_trace()
+
+            with schema_context('public'):
+                user = get_user_model().objects.get(pk=1)
+            with schema_context('muzy'):
+                if not get_user_model().objects.exists():
+                    user.pk = None
+                    user.save()
+
+
         if not Tenant.objects.exists():
             host = None
             if options['localhost']:
