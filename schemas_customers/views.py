@@ -83,8 +83,8 @@ class TenantCreate(CreateView):
         bpar = base64.b64encode(form.cleaned_data['description'].encode()).replace(b' ', b'').replace(b'\n', b'')
         # run in same virtual environment: https://gist.github.com/turicas/2897697
         ve = '/home/www-data/.virtualenvs/aaweb'
-        cmd = f'/bin/bash -c "source {ve}/bin/activate && python manage.py create_tenant -s {subdomain} -d {domain} -u {str(user)} -b {bpar}"'
-        cmd = shlex.split(cmd)
+        cmd = f'/bin/bash -c "source {ve}/bin/activate && python manage.py create_tenant -s {subdomain} -d {domain} -u {str(user)} -b"'
+        cmd = shlex.split(cmd).append(bpar)
         Popen(cmd)
 
         return redirect(form.success_url)
