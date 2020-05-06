@@ -84,10 +84,12 @@ class TenantCreate(CreateView):
         command = shlex.split(command_template)
         # replace(' ', ''): in special cases could base64 encoded string contain spaces for readability
         # (not sure if so while base64 is used)
-        Popen(command,
-                stdout='/home/www-data/dj/aaweb/aaweb/log/out',
-                stderr='/home/www-data/dj/aaweb/aaweb/log/err'
-                )
+        with open('/home/www-data/dj/aaweb/aaweb/log/out', 'w') as fout:
+            with open('/home/www-data/dj/aaweb/aaweb/log/err', 'w') as ferr:
+                Popen(command,
+                        stdout=fout,
+                        stderr=ferr
+                        )
         #Popen(('python', 'manage.py',
         #        'create_tenant', '-s', subdomain, '-d', domain, '-u', str(user),
         #        '-b', base64.b64encode(form.cleaned_data['description'].encode()).replace(b' ', b'').replace(b'\n', b'')))
