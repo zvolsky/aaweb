@@ -8,7 +8,7 @@ arrow==0.15.6             # via b2sdk
 asgiref==3.2.7            # via django
 attrs==19.3.0             # via pytest
 b2sdk==1.0.2              # via django-b2
-beautifulsoup4==4.6.0     # via wagtail
+beautifulsoup4==4.8.2     # via wagtail
 brotli==1.0.7             # via whitenoise
 certifi==2020.4.5.1       # via requests
 chardet==3.0.4            # via requests
@@ -37,7 +37,7 @@ logfury==0.1.2            # via b2sdk
 more-itertools==8.2.0     # via pytest
 ordered-set==4.0.1        # via django-tenant-schemas
 packaging==20.3           # via pytest
-pillow==6.2.2             # via wagtail
+pillow==7.1.2             # via wagtail
 pluggy==0.13.1            # via pytest
 psycopg2-binary==2.8.5    # via -r requirements/base.pip, django-tenant-schemas
 py==1.8.1                 # via pytest
@@ -50,15 +50,17 @@ rcssmin==1.0.6            # via django-compressor
 requests==2.23.0          # via b2sdk, wagtail
 rjsmin==1.1.0             # via django-compressor
 six==1.14.0               # via b2sdk, django-compressor, django-extensions, django-tenant-schemas, html5lib, l18n, libsass, logfury, packaging, python-dateutil
+soupsieve==2.0            # via beautifulsoup4
 sqlparse==0.3.1           # via django
 tqdm==4.46.0              # via b2sdk
 unidecode==1.1.1          # via wagtail
 urllib3==1.25.9           # via requests
-wagtail==2.8.2            # via -r requirements/base.pip
+wagtail==2.9              # via -r requirements/base.pip
 wcwidth==0.1.9            # via pytest
 webencodings==0.5.1       # via html5lib
 whitenoise[brotli]==5.0.1  # via -r requirements/base.pip
 willow==1.3               # via wagtail
+xlsxwriter==1.2.8         # via wagtail
 zipp==3.1.0               # via importlib-metadata
 
 # The following packages are considered to be unsafe in a requirements file:
