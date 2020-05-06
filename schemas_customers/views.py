@@ -1,6 +1,8 @@
 import base64
 import logging
-import subprocess
+import os
+import shlex
+from subprocess import Popen
 
 from tenant_schemas.utils import schema_context
 
@@ -76,11 +78,18 @@ class TenantCreate(CreateView):
         self.request.session['expected_web'] = expected_web = f"{subdomain}.{domain}{port}"
         self.request.session['a_tag'] = f'<a href="{self.request.scheme}://{expected_web}/admin">'
 
+        # run in same virtual environment: https://gist.github.com/turicas/2897697
+        command_template = '/bin/bash -c "source {}/{}/bin/activate && python --version"'
+        command = shlex.split(command_template.format(os.environ['WORKON_HOME'], 'aaweb'))
         # replace(' ', ''): in special cases could base64 encoded string contain spaces for readability
         # (not sure if so while base64 is used)
-        subprocess.Popen(('python', 'manage.py',
-                'create_tenant', '-s', subdomain, '-d', domain, '-u', str(user),
-                '-b', base64.b64encode(form.cleaned_data['description'].encode()).replace(b' ', b'').replace(b'\n', b'')))
+        Popen(command,
+                stdout='/home/www-data/dj/aaweb/aaweb/log/out',
+                stderr='/home/www-data/dj/aaweb/aaweb/log/err'
+                )
+        #Popen(('python', 'manage.py',
+        #        'create_tenant', '-s', subdomain, '-d', domain, '-u', str(user),
+        #        '-b', base64.b64encode(form.cleaned_data['description'].encode()).replace(b' ', b'').replace(b'\n', b'')))
 
         return redirect(form.success_url)
         # we must finish request first; following or subprocess.run() doesn't work from not exactly known reason
