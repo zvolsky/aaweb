@@ -79,8 +79,9 @@ class TenantCreate(CreateView):
         self.request.session['a_tag'] = f'<a href="{self.request.scheme}://{expected_web}/admin">'
 
         # run in same virtual environment: https://gist.github.com/turicas/2897697
-        command_template = '/bin/bash -c "source {}/{}/bin/activate && python --version"'
-        command = shlex.split(command_template.format(os.environ['WORKON_HOME'], 'aaweb'))
+        ve = '/home/www-data/.virtualenvs/aaweb'
+        command_template = f'/bin/bash -c "source {ve}/bin/activate && python --version"'
+        command = shlex.split(command_template)
         # replace(' ', ''): in special cases could base64 encoded string contain spaces for readability
         # (not sure if so while base64 is used)
         Popen(command,
