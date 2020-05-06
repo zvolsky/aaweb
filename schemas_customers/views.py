@@ -78,21 +78,14 @@ class TenantCreate(CreateView):
         self.request.session['expected_web'] = expected_web = f"{subdomain}.{domain}{port}"
         self.request.session['a_tag'] = f'<a href="{self.request.scheme}://{expected_web}/admin">'
 
-        # run in same virtual environment: https://gist.github.com/turicas/2897697
-        ve = '/home/www-data/.virtualenvs/aaweb'
-        command_template = f'/bin/bash -c "source {ve}/bin/activate && python --version"'
-        command = shlex.split(command_template)
         # replace(' ', ''): in special cases could base64 encoded string contain spaces for readability
         # (not sure if so while base64 is used)
-        with open('/home/www-data/dj/aaweb/aaweb/log/out', 'w') as fout:
-            with open('/home/www-data/dj/aaweb/aaweb/log/err', 'w') as ferr:
-                Popen(command,
-                        stdout=fout,
-                        stderr=ferr
-                        )
-        #Popen(('python', 'manage.py',
-        #        'create_tenant', '-s', subdomain, '-d', domain, '-u', str(user),
-        #        '-b', base64.b64encode(form.cleaned_data['description'].encode()).replace(b' ', b'').replace(b'\n', b'')))
+        bpar = base64.b64encode(form.cleaned_data['description'].encode()).replace(b' ', b'').replace(b'\n', b'')
+        # run in same virtual environment: https://gist.github.com/turicas/2897697
+        ve = '/home/www-data/.virtualenvs/aaweb'
+        cmd = f'/bin/bash -c "source {ve}/bin/activate && python manage.py create_tenant -s {subdomain} -d {domain} -u {str(user)} -b {bpar}"'
+        cmd = shlex.split(cmd)
+        Popen(cmd)
 
         return redirect(form.success_url)
         # we must finish request first; following or subprocess.run() doesn't work from not exactly known reason
