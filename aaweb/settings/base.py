@@ -210,7 +210,8 @@ WSGI_APPLICATION = 'aaweb.wsgi.application'
 #mz ++
 dbname = __package__.rsplit('.')[-2]
 # postgres: missing or SQLITE=   ; sqlite: SQLITE=True, Yes, atp.
-if os.environ.get('MZ_SQLITE') or bool(config.get('main', 'SQLITE')):  # do not use with tenant-schemas
+if os.environ.get('MZ_SQLITE') or bool(config.get('main', 'SQLITE')):    # hint if "no section.." -> chmod 644 env.ini
+    # do not use with tenant-schemas
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
