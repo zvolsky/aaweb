@@ -1,0 +1,13 @@
+#?? -c c/base.pip
+-r base_in.pip
+#-r test.pip
+
+# debugging
+django-debug-toolbar
+
+# deployment
+Fabric3
+
+ipython
+pywatchman
+pip-tools
