@@ -356,7 +356,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': '/var/log/django/opentrafficweb/django.log',   # changed !!!!!!!!
+            'filename': '/var/log/django/aaweb/django.log',   # changed !!!!!!!!
             'formatter': 'colored',
         },
     },

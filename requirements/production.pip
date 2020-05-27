@@ -1,5 +1,0 @@
-#?? -c c/base.pip
--r base.pip
-#-r test.pip
-
-gunicorn
