@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import sys
 from configparser import RawConfigParser   #mz ++
 
 from django.contrib.messages import constants
@@ -46,7 +47,8 @@ DEV_TMP_DIR = os.path.join(BASE_DIR, '.devtmp')
 # https://www.codementor.io/@pauloscardine/15-minute-guide-to-secure-saas-multitenancy-with-django-and-let-s-encrypt-ijtlarca8
 #mz ++
 TENANT_MODEL = "schemas_customers.Tenant"
-PG_EXTRA_SEARCH_PATHS = ['extensions']   # must be commented out for re-creating database, before migrate_schemas --shared
+if 'manage.py migrate' not in ' '.join(sys.argv).replace('makemigrations', 'migrate'):
+    PG_EXTRA_SEARCH_PATHS = ['extensions']   # must be commented out for re-creating database, before migrate_schemas --shared
 # 2020-02-17 made PR for this, would be accepted?
 
 AUTH_USER_MODEL = 'users.User'
